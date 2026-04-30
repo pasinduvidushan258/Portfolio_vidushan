@@ -1,0 +1,11 @@
+uploads/
+
+includes/db_connect.php
+
+.DS_Store
+Thumbs.db
+*.db
+
+.vscode/
+
+admin/generate_pass.php

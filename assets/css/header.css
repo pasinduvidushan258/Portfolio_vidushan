@@ -1,0 +1,152 @@
+header {
+    background-color: rgba(15, 23, 42, 0.7); /* Semi-transparent background for a subtle look */
+    backdrop-filter: blur(15px); /* Background blur for glass effect */
+    -webkit-backdrop-filter: blur(15px);
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle white border at the bottom */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Divide the header into three sections using Flexbox */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1; /* This centers the navigation */
+}
+
+.site-logo {
+    width: 65px; 
+    height: 65px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: none; 
+}
+
+.logo-text h1 {
+    font-size: 1.6rem;
+    margin: 0;
+    color: var(--text-color);
+}
+
+.logo-text span {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+}
+
+/* Center the navigation properly */
+nav {
+    flex: 2; 
+    display: flex;
+    justify-content: center;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px; /* Increased spacing between menu items */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 6px 18px; 
+    border-radius: 25px; 
+    transition: 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: rgba(129, 140, 248, 0.15);
+    color: var(--accent-color);
+}
+
+
+nav ul li a.active {
+    background-color: var(--accent-color);
+    color: #ffffff; 
+    box-shadow: 0 4px 10px rgba(129, 140, 248, 0.4); 
+}
+
+
+
+/* Align social links to the right */
+.social-links {
+    display: flex;
+    gap: 15px;
+    flex: 1; 
+    justify-content: flex-end; 
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #334155;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    transition: 0.3s;
+}
+
+.social-icon:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* --- Mobile Responsive (Right Sidebar) --- */
+@media (max-width: 1100px) {
+    .menu-toggle {
+        display: block; 
+    }
+
+    .social-links {
+        display: none; 
+    }
+
+    /* Sidebar appearance */
+    nav {
+        position: fixed;
+        top: 0;
+        right: -300px; /* Hidden off-screen to the right */
+        width: 280px;
+        height: 100vh;
+        background-color: var(--nav-bg);
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+        transition: 0.4s ease-in-out;
+        z-index: 999;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 100px; /* Padded top for menu positioning */
+    }
+
+    nav.active {
+        right: 0; /* Slides in when menu button is clicked */
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a.active::after {
+        display: none; /* No underline on mobile, color change suffices */
+    }
+}

@@ -1,0 +1,140 @@
+/* Main footer background */
+.site-footer {
+    background-color: var(--nav-bg); /* Uses the same color as the header */
+    padding: 60px 5% 20px;
+    border-top: 1px solid #334155;
+    margin-top: 80px; /* Adds some space from the content above */
+    color: var(--text-color);
+}
+
+/* Four-column layout using CSS Grid */
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.footer-col h3 {
+    font-size: 0.9rem; /* Smaller font size */
+    letter-spacing: 2px; /* Increased letter spacing */
+    text-transform: uppercase; /* All uppercase letters */
+    margin-bottom: 25px;
+    color: #ffffff;
+    font-weight: 600;
+    position: relative;
+}
+
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), transparent); /* Attractive gradient line */
+}
+
+.footer-col p {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.footer-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    object-fit: cover;
+}
+
+/* Footer Links */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    text-decoration: none;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--accent-color);
+    padding-left: 8px; /* Slight indent on hover */
+}
+
+/* Contact Info Icons */
+.contact-info li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+.contact-info li i {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+/* Social Icons */
+.footer-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.footer-social a {
+    width: 35px;
+    height: 35px;
+    background-color: #334155;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-social a:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+/* Bottom Copyright */
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #334155;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on tablets */
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-container {
+        grid-template-columns: 1fr; /* Single column on phones */
+    }
+}
