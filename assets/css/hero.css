@@ -1,14 +1,14 @@
 /* --- Hero Section Main Layout --- */
 .hero-section {
     height: calc(100vh - 140px); 
-    min-height: 420px;
+    min-height: 600px;
     
     display: flex;
     flex-direction: row; 
     align-items: center;
     justify-content: space-between; 
     
-    padding: 0 10% 20px; 
+    padding: 0 10% 140px; 
     
     position: relative;
     overflow: hidden;

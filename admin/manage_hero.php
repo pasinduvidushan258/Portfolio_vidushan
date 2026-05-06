@@ -63,7 +63,6 @@ include 'header.php';
 <div class="header">
     <div class="header-left">
         <h1>Manage Hero Section 🦸‍♂️</h1>
-        <p>ඔබගේ වෙබ් අඩවියේ මුල් පිටුවේ පෙනෙන ප්‍රධාන විස්තර මෙතැනින් වෙනස් කරන්න.</p>
     </div>
 </div>
 

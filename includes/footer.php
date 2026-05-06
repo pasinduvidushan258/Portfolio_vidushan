@@ -20,11 +20,11 @@
         <div class="footer-col">
             <h3>Quick Links</h3>
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="projects.php">Projects</a></li>
-                <li><a href="education.php">Education</a></li>
-                <li><a href="contact.php">Contact</a></li>
+                <li><a href="index.php#home">Home</a></li>
+                <li><a href="index.php#about">About</a></li>
+                <li><a href="index.php#projects">Projects</a></li>
+                <li><a href="index.php#education">Education</a></li>
+                <li><a href="index.php#contact">Contact</a></li>
             </ul>
         </div>
 

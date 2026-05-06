@@ -1,5 +1,6 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
     --bg-color: #0f172a;
@@ -12,20 +13,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
+    font-family: 'Poppins', sans-serif; /* Applies font to the entire site */
 }
 
 /* --- Hero Section Premium Styles --- */
 .hero-section {
     position: relative;
-    padding: 150px 20px;
+    padding: 180px 20px 120px; /* Increased top padding */
     text-align: center;
     overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Background glow effect */
@@ -38,43 +42,6 @@ body {
     height: 50vw;
     background: radial-gradient(circle, rgba(129, 140, 248, 0.15) 0%, transparent 60%);
     z-index: -1; 
-}
-
-/* Gradient color for the name */
-.gradient-text {
-    font-size: 3.5rem; 
-    font-weight: 700;
-    margin-bottom: 15px;
-    background: linear-gradient(to right, #ffffff, #818cf8, #c084fc); 
-    -webkit-background-clip: text;
-    background-clip: text; /* Prevents yellow warning border */
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
-}
-
-.hero-subtitle {
-    font-size: 1.1rem;
-    color: #94a3b8;
-    letter-spacing: 1.5px;
-}
-
-
-/* --- Google Fonts (Import at the top) --- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-body {
-    font-family: 'Poppins', sans-serif; /* Applies font to the entire site */
-}
-
-/* --- Hero Section Premium Upgrades --- */
-.hero-section {
-    position: relative;
-    padding: 180px 20px 120px; /* Increased top padding */
-    text-align: center;
-    overflow: hidden; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 /* Modern Badge Design */
@@ -161,4 +128,185 @@ body {
     border-color: white;
     background: rgba(255, 255, 255, 0.05);
     transform: translateY(-3px);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+main[id], section[id] {
+    scroll-margin-top: 100px; 
+}
+
+.page-section {
+    padding: 80px 20px;
+    background-color: #0b1120;
+    color: #fff;
+}
+
+.page-section:nth-of-type(even) {
+    background-color: #090c1c;
+}
+
+.section-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-heading .sub-title {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.section-heading .main-title {
+    font-size: 3rem;
+    color: #818cf8;
+    margin: 0;
+}
+
+.service-grid,
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.service-card,
+.project-card,
+.education-card,
+.contact-card {
+    background-color: #1e293b;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.service-card h3,
+.project-card h3,
+.education-card h3 {
+    color: #f8fafc;
+    margin-bottom: 14px;
+}
+
+.service-card p,
+.project-card p,
+.education-card p,
+.contact-card p {
+    color: #cbd5e1;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.contact-card a {
+    color: #818cf8;
+    text-decoration: none;
+}
+
+.contact-card a:hover {
+    text-decoration: underline;
+}
+
+/* =======================================================
+                  MOBILE RESPONSIVE FIXES 
+   ======================================================= */
+
+
+@media (max-width: 991px) {
+    .service-grid, .project-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+
+@media (max-width: 768px) {
+    
+    .service-grid, .project-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .section-wrapper {
+        width: 90% !important;
+    }
+
+    .page-section {
+        padding: 60px 0 !important;
+    }
+
+    .tech-skills-section {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .skills-container, .skills-row {
+        flex-direction: column !important;
+        width: 100% !important;
+    }
+
+    .project-filters {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+    }
+    
+    .p-card-img {
+        height: 200px !important;
+    }
+
+    .tech-skills-section .skills-wrapper, 
+    .tech-skills-section .skills-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important; 
+        gap: 12px !important; 
+        width: 100% !important;
+        flex-direction: row !important;
+    }
+
+    .skill-box, 
+    .skill-item {
+        width: 100% !important;
+        height: auto !important; 
+        min-height: unset !important;
+        aspect-ratio: 1 / 1 !important; 
+        padding: 15% !important; 
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .skill-icon {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .tech-skills-section img, 
+    .skill-icon img {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 45px !important; 
+        object-fit: contain !important;
+    }
+
+    .skill-name {
+        display: none !important; 
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2rem !important; 
+    }
+    .p-title {
+        font-size: 1.2rem !important;
+    }
 }

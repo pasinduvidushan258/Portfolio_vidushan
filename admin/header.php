@@ -68,10 +68,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <ul class="nav-links">
             <li><a href="dashboard.php" class="<?php echo ($current_page == 'dashboard.php') ? 'active' : ''; ?>"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
             <li><a href="manage_hero.php" class="<?php echo ($current_page == 'manage_hero.php') ? 'active' : ''; ?>"><i class="fas fa-home"></i>Home & Hero</a></li>
-            <li><a href="#"><i class="fas fa-user-clock"></i>About & Experience</a></li>
-            <li><a href="#"><i class="fas fa-concierge-bell"></i>Services</a></li>
-            <li><a href="#"><i class="fas fa-project-diagram"></i>Projects</a></li>
-            <li><a href="#"><i class="fas fa-award"></i>Skills & Achievements</a></li>
+            <li><a href="manage_about.php" class="<?php echo ($current_page == 'manage_about.php') ? 'active' : ''; ?>"><i class="fas fa-user-clock"></i>About & Experience</a></li>
+            <li><a href="manage_services.php" class="<?php echo ($current_page == 'manage_services.php') ? 'active' : ''; ?>"><i class="fas fa-concierge-bell"></i>Services</a></li>
+            <li><a href="manage_projects.php" class="<?php echo ($current_page == 'manage_projects.php') ? 'active' : ''; ?>"><i class="fas fa-project-diagram"></i>Projects</a></li>
+            <li><a href="manage_skills.php" class="<?php echo ($current_page == 'manage_skills.php') ? 'active' : ''; ?>"><i class="fas fa-award"></i>Skills & Achievements</a></li>
             <li><a href="#"><i class="fas fa-blog"></i>Blog Posts</a></li>
             <li><a href="#"><i class="fas fa-envelope"></i>Messages</a></li>
         </ul>

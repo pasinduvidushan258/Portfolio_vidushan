@@ -1,7 +1,3 @@
-<?php
-// Retrieve the current page name for active link highlighting
-$current_page = basename($_SERVER['PHP_SELF']);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,12 +26,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     <nav id="nav-menu">
         <ul>
-            <li><a href="index.php" class="<?php echo ($current_page == 'index.php') ? 'active' : ''; ?>">Home</a></li>
-            <li><a href="about.php" class="<?php echo ($current_page == 'about.php') ? 'active' : ''; ?>">About</a></li>
-            <li><a href="services.php" class="<?php echo ($current_page == 'services.php') ? 'active' : ''; ?>">Services</a></li>
-            <li><a href="projects.php" class="<?php echo ($current_page == 'projects.php') ? 'active' : ''; ?>">Projects</a></li>
-            <li><a href="education.php" class="<?php echo ($current_page == 'education.php') ? 'active' : ''; ?>">Education</a></li>
-            <li><a href="contact.php" class="<?php echo ($current_page == 'contact.php') ? 'active' : ''; ?>">Contact</a></li>
+            <li><a href="index.php#home" class="nav-link active">Home</a></li>
+            <li><a href="index.php#about" class="nav-link">About</a></li>
+            <li><a href="index.php#services" class="nav-link">Services</a></li>
+            <li><a href="index.php#projects" class="nav-link">Projects</a></li>
+            <li><a href="index.php#education" class="nav-link">Education</a></li>
+            <li><a href="index.php#contact" class="nav-link">Contact</a></li>
         </ul>
     </nav>
 
@@ -55,11 +51,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <script>
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('#nav-menu ul li a');
 
     mobileMenu.addEventListener('click', () => {
         navMenu.classList.toggle('active');
-        
-        // Toggle the menu icon between bars and close (X) when the menu is opened or closed
         const icon = mobileMenu.querySelector('i');
         if (navMenu.classList.contains('active')) {
             icon.classList.remove('fa-bars');
@@ -69,4 +64,42 @@ $current_page = basename($_SERVER['PHP_SELF']);
             icon.classList.add('fa-bars');
         }
     });
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+            setActiveNavLink(link);
+        });
+    });
+
+    function setActiveNavLink(activeLink) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        activeLink.classList.add('active');
+    }
+
+    function updateActiveNavOnScroll() {
+        const sections = document.querySelectorAll('main[id], section[id]');
+        let scrollPosition = window.pageYOffset;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                const activeLink = document.querySelector(`#nav-menu ul li a[href$="#${sectionId}"]`);
+                if (activeLink) {
+                    setActiveNavLink(activeLink);
+                }
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveNavOnScroll);
+    document.addEventListener('DOMContentLoaded', updateActiveNavOnScroll);
 </script>
