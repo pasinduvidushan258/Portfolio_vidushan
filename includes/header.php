@@ -1,3 +1,16 @@
+<?php
+require_once 'includes/db_connect.php';
+
+try {
+    $social_stmt = $conn->query("SELECT * FROM social_links WHERE id=1");
+    $social = $social_stmt->fetch(PDO::FETCH_ASSOC);
+    if(!$social) {
+        $social = ['github'=>'', 'linkedin'=>'', 'whatsapp'=>''];
+    }
+} catch(PDOException $e) {
+    $social = ['github'=>'', 'linkedin'=>'', 'whatsapp'=>''];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,15 +49,23 @@
     </nav>
 
     <div class="social-links">
-        <a href="https://github.com/pasinduvidushan258" target="_blank" class="social-icon" title="GitHub">
-            <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/pasindu-vidushan-b34a6a389?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" class="social-icon" title="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="https://wa.me/766437197" target="_blank" class="social-icon" title="Whatsapp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
+        <?php if(!empty($social['github'])): ?>
+            <a href="<?php echo htmlspecialchars($social['github']); ?>" target="_blank" class="social-icon" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+        <?php endif; ?>
+
+        <?php if(!empty($social['linkedin'])): ?>
+            <a href="<?php echo htmlspecialchars($social['linkedin']); ?>" target="_blank" class="social-icon" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        <?php endif; ?>
+
+        <?php if(!empty($social['whatsapp'])): ?>
+            <a href="<?php echo htmlspecialchars($social['whatsapp']); ?>" target="_blank" class="social-icon" title="Whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        <?php endif; ?>
     </div>
 </header>
 

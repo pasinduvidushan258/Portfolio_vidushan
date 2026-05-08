@@ -10,82 +10,8 @@ if (!isset($_SESSION['admin_id'])) {
 
 $success_msg = "";
 $error_msg = "";
-$edit_experience = null;
 
-// Delete an existing experience entry
-if (isset($_GET['action']) && $_GET['action'] === 'delete_experience' && isset($_GET['id'])) {
-    $exp_id = intval($_GET['id']);
-    try {
-        $stmt = $conn->prepare("DELETE FROM experience WHERE id = :id");
-        $stmt->bindParam(':id', $exp_id, PDO::PARAM_INT);
-        $stmt->execute();
-        $success_msg = "Experience entry deleted successfully!";
-    } catch (PDOException $e) {
-        $error_msg = "Database Error: " . $e->getMessage();
-    }
-}
-
-// Load experience entry for editing
-if (isset($_GET['action']) && $_GET['action'] === 'edit_experience' && isset($_GET['id'])) {
-    $exp_id = intval($_GET['id']);
-    try {
-        $stmt = $conn->prepare("SELECT * FROM experience WHERE id = :id");
-        $stmt->bindParam(':id', $exp_id, PDO::PARAM_INT);
-        $stmt->execute();
-        $edit_experience = $stmt->fetch(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        $error_msg = "Database Error: " . $e->getMessage();
-    }
-}
-
-// Update an existing experience entry
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_experience'])) {
-    $experience_id = intval($_POST['experience_id']);
-    $exp_title = trim($_POST['exp_title']);
-    $organization = trim($_POST['organization']);
-    $duration = trim($_POST['duration']);
-    $exp_description = trim($_POST['exp_description']);
-
-    $sql = "UPDATE experience SET title = :title, organization = :organization, duration = :duration, description = :description";
-    $params = [
-        ':title' => $exp_title,
-        ':organization' => $organization,
-        ':duration' => $duration,
-        ':description' => $exp_description,
-        ':id' => $experience_id
-    ];
-
-    if (isset($_FILES['logo']) && $_FILES['logo']['error'] == 0) {
-        $target_dir = "../uploads/";
-        $image_name = time() . "_logo_" . basename($_FILES["logo"]["name"]);
-        $target_file = $target_dir . $image_name;
-        if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
-            $sql .= ", logo_path = :logo_path";
-            $params[':logo_path'] = $image_name;
-        } else {
-            $error_msg = "Failed to upload logo.";
-        }
-    }
-
-    if (empty($error_msg)) {
-        try {
-            $sql .= " WHERE id = :id";
-            $stmt = $conn->prepare($sql);
-            foreach ($params as $key => $value) {
-                $stmt->bindValue($key, $value);
-            }
-            $stmt->execute();
-            $success_msg = "Experience updated successfully!";
-            header("Location: manage_about.php");
-            exit();
-        } catch (PDOException $e) {
-            $error_msg = "Database Error: " . $e->getMessage();
-        }
-    }
-}
-
-
-// 1. Identity & Bio Update කිරීම
+// 1. Identity & Bio Update
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_identity'])) {
     $check_stmt = $conn->query("SELECT COUNT(*) FROM about_identity WHERE id = 1");
     if($check_stmt->fetchColumn() == 0) {
@@ -133,64 +59,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_identity'])) {
     }
 }
 
-// 2. Add New Experience Entry
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_experience'])) {
-    $exp_title = trim($_POST['exp_title']);
-    $organization = trim($_POST['organization']);
-    $duration = trim($_POST['duration']);
-    $exp_description = trim($_POST['exp_description']);
-
-    $image_query_part_cols = "";
-    $image_query_part_vals = "";
-    $image_name = null;
-
-    if (isset($_FILES['logo']) && $_FILES['logo']['error'] == 0) {
-        $target_dir = "../uploads/";
-        $image_name = time() . "_logo_" . basename($_FILES["logo"]["name"]);
-        $target_file = $target_dir . $image_name;
-
-        if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
-            $image_query_part_cols = ", logo_path";
-            $image_query_part_vals = ", :logo_path";
-        } else {
-            $error_msg = "Failed to upload logo.";
-        }
-    }
-
-    if (empty($error_msg)) {
-        try {
-            $sql = "INSERT INTO experience (title, organization, duration, description" . $image_query_part_cols . ") 
-                    VALUES (:title, :organization, :duration, :description" . $image_query_part_vals . ")";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':title', $exp_title);
-            $stmt->bindParam(':organization', $organization);
-            $stmt->bindParam(':duration', $duration);
-            $stmt->bindParam(':description', $exp_description);
-            if ($image_name) {
-                $stmt->bindParam(':logo_path', $image_name);
-            }
-            
-            $stmt->execute();
-            $success_msg = "Experience added successfully!";
-        } catch(PDOException $e) {
-            $error_msg = "Database Error: " . $e->getMessage();
-        }
-    }
-}
-
-// Fetch existing identity and experience data for display
+// Fetch existing identity data for display
 try {
     $stmt = $conn->prepare("SELECT * FROM about_identity WHERE id = 1");
     $stmt->execute();
     $identity = $stmt->fetch(PDO::FETCH_ASSOC);
     
     if (!$identity) {
-        $identity = ['title' => '', 'description' => '', 'education_info' => '', 'languages' => ''];
+        $identity = ['title' => '', 'description' => '', 'education_info' => '', 'languages' => '', 'image_path' => ''];
     }
-
-    $stmt_exp = $conn->prepare("SELECT * FROM experience ORDER BY id DESC");
-    $stmt_exp->execute();
-    $experiences = $stmt_exp->fetchAll(PDO::FETCH_ASSOC);
 } catch(PDOException $e) {
     $error_msg = "Error fetching data: " . $e->getMessage();
 }
@@ -199,15 +76,12 @@ try {
 include 'header.php'; 
 ?>
 
-<!-- Header Section -->
 <div class="header">
     <div class="header-left">
-        <h1>Manage About & Experience 🧑‍🎓</h1>
-        <p>ඔබගේ පෞද්ගලික තොරතුරු සහ වෘත්තීය අත්දැකීම් මෙතැනින් කළමනාකරණය කරන්න.</p>
+        <h1>Manage About & Bio 🧑‍🎓</h1>
     </div>
 </div>
 
-<!-- Alerts -->
 <?php if($success_msg): ?>
     <div class="form-container" style="padding: 15px; margin-bottom: 20px;">
         <div class="alert alert-success" style="margin: 0;"><i class="fas fa-check-circle"></i> <?php echo $success_msg; ?></div>
@@ -219,12 +93,10 @@ include 'header.php';
     </div>
 <?php endif; ?>
 
-<!-- Section 1: Identity Form -->
 <div class="form-container" style="margin-bottom: 30px;">
     <h2 style="color: #fff; margin-bottom: 20px; font-size: 1.2rem; border-bottom: 1px solid #2d3748; padding-bottom: 10px;">Identity & Bio</h2>
     
-    <!-- Identity Update Form -->
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="" method="POST" enctype="multipart/form-data" id="editForm">
         <div class="input-group">
             <label>About Section Title</label>
             <input type="text" name="title" value="<?php echo htmlspecialchars($identity['title'] ?? ''); ?>" placeholder="e.g. About Pasindu Vidushan" required>
@@ -260,105 +132,42 @@ include 'header.php';
     </form>
 </div>
 
-<!-- Section 2: Experience Form -->
-<div class="form-container">
-    <?php if ($edit_experience): ?>
-        <h2 style="color: #fff; margin-bottom: 20px; font-size: 1.2rem; border-bottom: 1px solid #2d3748; padding-bottom: 10px;">Edit Experience</h2>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="experience_id" value="<?php echo htmlspecialchars($edit_experience['id']); ?>">
-            <div class="input-group">
-                <label>Job / Role Title</label>
-                <input type="text" name="exp_title" value="<?php echo htmlspecialchars($edit_experience['title']); ?>" required>
-            </div>
-
-            <div class="input-group">
-                <label>Organization / Company</label>
-                <input type="text" name="organization" value="<?php echo htmlspecialchars($edit_experience['organization']); ?>" required>
-            </div>
-
-            <div class="input-group">
-                <label>Duration / Date</label>
-                <input type="text" name="duration" value="<?php echo htmlspecialchars($edit_experience['duration']); ?>" required>
-            </div>
-
-            <div class="input-group">
-                <label>Experience Description</label>
-                <textarea name="exp_description" rows="3" required><?php echo htmlspecialchars($edit_experience['description']); ?></textarea>
-            </div>
-
-            <div class="input-group">
-                <label>Organization Logo (Optional)</label>
-                <input type="file" name="logo" accept="image/*">
-                <?php if (!empty($edit_experience['logo_path'])): ?>
-                    <img src="../uploads/<?php echo htmlspecialchars($edit_experience['logo_path']); ?>" alt="Current Logo" class="current-img">
+<div class="form-container" style="overflow-x: auto;">
+    <h2 style="color: #fff; margin-bottom: 20px; font-size: 1.2rem; border-bottom: 1px solid #2d3748; padding-bottom: 10px;">Current Saved Info</h2>
+    
+    <table style="width:100%; color:#fff; border-collapse:collapse; background: #1e293b; border-radius: 12px; overflow: hidden;">
+        <tr style="background:#0f172a; text-align:left;">
+            <th style="padding:15px; width: 15%;">Profile Image</th>
+            <th style="padding:15px; width: 25%;">Title & Languages</th>
+            <th style="padding:15px; width: 45%;">Bio Description</th>
+            <th style="padding:15px; width: 15%; text-align: center;">Action</th>
+        </tr>
+        <tr style="border-bottom:1px solid #334155;">
+            <td style="padding:15px; vertical-align: top;">
+                <?php if(!empty($identity['image_path'])): ?>
+                    <img src="../uploads/<?php echo htmlspecialchars($identity['image_path']); ?>" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover; border: 2px solid #334155;">
+                <?php else: ?>
+                    <div style="width: 70px; height: 70px; border-radius: 8px; background: #334155; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;"><i class="fas fa-user"></i></div>
                 <?php endif; ?>
-            </div>
-
-            <button type="submit" name="update_experience" class="btn-submit" style="background: #10b981;"><i class="fas fa-save"></i> Update Experience</button>
-            <a href="manage_about.php" class="btn-submit" style="background: #64748b; margin-left: 10px; text-decoration: none; display: inline-block;">Cancel</a>
-        </form>
-    <?php else: ?>
-        <h2 style="color: #fff; margin-bottom: 20px; font-size: 1.2rem; border-bottom: 1px solid #2d3748; padding-bottom: 10px;">Add New Experience</h2>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <div class="input-group">
-                <label>Job / Role Title</label>
-                <input type="text" name="exp_title" placeholder="e.g. Social Media Marketer" required>
-            </div>
-
-            <div class="input-group">
-                <label>Organization / Company</label>
-                <input type="text" name="organization" placeholder="e.g. PSSF" required>
-            </div>
-
-            <div class="input-group">
-                <label>Duration / Date</label>
-                <input type="text" name="duration" placeholder="e.g. 2025 Jan - Present" required>
-            </div>
-
-            <div class="input-group">
-                <label>Experience Description</label>
-                <textarea name="exp_description" rows="3" placeholder="What did you do there?" required></textarea>
-            </div>
-
-            <div class="input-group">
-                <label>Organization Logo (Optional)</label>
-                <input type="file" name="logo" accept="image/*">
-            </div>
-
-            <button type="submit" name="add_experience" class="btn-submit" style="background: #10b981;"><i class="fas fa-plus"></i> Add Experience</button>
-        </form>
-    <?php endif; ?>
-</div>
-
-<div class="form-container" style="margin-top: 30px; overflow-x: auto;">
-    <h2 style="color: #fff; margin-bottom: 20px; font-size: 1.2rem; border-bottom: 1px solid #2d3748; padding-bottom: 10px;">Saved Experience Entries</h2>
-    <?php if (!empty($experiences)): ?>
-        <table style="width: 100%; border-collapse: collapse; color: #fff;">
-            <thead>
-                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <th style="padding: 12px 10px; text-align: left;">Title</th>
-                    <th style="padding: 12px 10px; text-align: left;">Organization</th>
-                    <th style="padding: 12px 10px; text-align: left;">Duration</th>
-                    <th style="padding: 12px 10px; text-align: left;">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($experiences as $experience): ?>
-                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-                        <td style="padding: 12px 10px;"><?php echo htmlspecialchars($experience['title']); ?></td>
-                        <td style="padding: 12px 10px;"><?php echo htmlspecialchars($experience['organization']); ?></td>
-                        <td style="padding: 12px 10px;"><?php echo htmlspecialchars($experience['duration']); ?></td>
-                        <td style="padding: 12px 10px;">
-                            <a href="manage_about.php?action=edit_experience&id=<?php echo $experience['id']; ?>" style="color: #8b5cf6; margin-right: 15px;">Edit</a>
-                            <a href="manage_about.php?action=delete_experience&id=<?php echo $experience['id']; ?>" style="color: #ef4444;" onclick="return confirm('Delete this experience entry?');">Delete</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p style="color: #cbd5e1;">No experience records found yet.</p>
-    <?php endif; ?>
+            </td>
+            <td style="padding:15px; vertical-align: top;">
+                <b style="color: #f8fafc; font-size: 1.05rem;"><?php echo htmlspecialchars($identity['title']); ?></b><br>
+                <div style="margin-top: 8px;">
+                    <span style="color: #10b981; font-size: 0.9rem; display: block;"><i class="fas fa-language"></i> <?php echo htmlspecialchars($identity['languages']); ?></span>
+                </div>
+            </td>
+            <td style="padding:15px; vertical-align: top;">
+                <div style="max-height: 80px; overflow-y: auto; color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; padding-right: 10px;">
+                    <?php echo nl2br(htmlspecialchars($identity['description'])); ?>
+                </div>
+            </td>
+            <td style="padding:15px; text-align: center; vertical-align: middle;">
+                <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.querySelector('input[name=\'title\']').focus(); return false;" style="color:#3b82f6; background: rgba(59, 130, 246, 0.1); padding: 10px 15px; border-radius: 8px; text-decoration: none; transition: 0.3s; display: inline-block;">
+                    <i class="fas fa-edit"></i> Edit Info
+                </a>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <?php 

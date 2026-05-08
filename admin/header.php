@@ -62,21 +62,22 @@ $current_page = basename($_SERVER['PHP_SELF']);
 </head>
 <body>
 
-    <!-- Sidebar Menu -->
     <div class="sidebar">
         <h2>Pasindu's Panel</h2>
         <ul class="nav-links">
             <li><a href="dashboard.php" class="<?php echo ($current_page == 'dashboard.php') ? 'active' : ''; ?>"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
             <li><a href="manage_hero.php" class="<?php echo ($current_page == 'manage_hero.php') ? 'active' : ''; ?>"><i class="fas fa-home"></i>Home & Hero</a></li>
-            <li><a href="manage_about.php" class="<?php echo ($current_page == 'manage_about.php') ? 'active' : ''; ?>"><i class="fas fa-user-clock"></i>About & Experience</a></li>
+            
+            <li><a href="manage_about.php" class="<?php echo ($current_page == 'manage_about.php') ? 'active' : ''; ?>"><i class="fas fa-user-clock"></i>About & Bio</a></li>
+            <li><a href="manage_work_experience.php" class="<?php echo ($current_page == 'manage_work_experience.php') ? 'active' : ''; ?>"><i class="fas fa-briefcase"></i>Work Experience</a></li>
             <li><a href="manage_services.php" class="<?php echo ($current_page == 'manage_services.php') ? 'active' : ''; ?>"><i class="fas fa-concierge-bell"></i>Services</a></li>
             <li><a href="manage_projects.php" class="<?php echo ($current_page == 'manage_projects.php') ? 'active' : ''; ?>"><i class="fas fa-project-diagram"></i>Projects</a></li>
             <li><a href="manage_skills.php" class="<?php echo ($current_page == 'manage_skills.php') ? 'active' : ''; ?>"><i class="fas fa-award"></i>Skills & Achievements</a></li>
-            <li><a href="#"><i class="fas fa-blog"></i>Blog Posts</a></li>
-            <li><a href="#"><i class="fas fa-envelope"></i>Messages</a></li>
+            <li><a href="manage_education.php" class="<?php echo ($current_page == 'manage_education.php') ? 'active' : ''; ?>"><i class="fas fa-graduation-cap"></i>Education</a></li>
+            <li><a href="manage_certifications.php" class="<?php echo ($current_page == 'manage_certifications.php') ? 'active' : ''; ?>"><i class="fas fa-certificate"></i>Certifications</a></li>
+            <li><a href="manage_messages.php" class="<?php echo ($current_page == 'manage_messages.php') ? 'active' : ''; ?>"><i class="fas fa-envelope"></i>Messages</a></li>
         </ul>
         <a href="logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 
-    <!-- Main Content Area Starts Here -->
     <div class="main-content">

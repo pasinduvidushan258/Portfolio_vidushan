@@ -1,3 +1,17 @@
+<?php
+require_once 'includes/db_connect.php';
+if (!isset($social)) {
+    try {
+        $social_stmt = $conn->query("SELECT * FROM social_links WHERE id=1");
+        $social = $social_stmt->fetch(PDO::FETCH_ASSOC);
+        if(!$social) {
+            $social = ['github'=>'', 'linkedin'=>'', 'whatsapp'=>'', 'youtube'=>'', 'instagram'=>'', 'facebook'=>''];
+        }
+    } catch(PDOException $e) {
+        $social = ['github'=>'', 'linkedin'=>'', 'whatsapp'=>'', 'youtube'=>'', 'instagram'=>'', 'facebook'=>''];
+    }
+}
+?>
 <link rel="stylesheet" href="assets/css/footer.css">
 
 <footer class="site-footer">
@@ -8,12 +22,29 @@
             <h2>Pasindu Vidushan</h2>
             <p>Full stack software Developer & Content<br>Creator based in Sri Lanka.</p>
             <div class="footer-social">
-                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <?php if(!empty($social['github'])): ?>
+                    <a href="<?php echo htmlspecialchars($social['github']); ?>" target="_blank"><i class="fab fa-github"></i></a>
+                <?php endif; ?>
+                
+                <?php if(!empty($social['linkedin'])): ?>
+                    <a href="<?php echo htmlspecialchars($social['linkedin']); ?>" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <?php endif; ?>
+                
+                <?php if(!empty($social['whatsapp'])): ?>
+                    <a href="<?php echo htmlspecialchars($social['whatsapp']); ?>" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <?php endif; ?>
+                
+                <?php if(!empty($social['youtube'])): ?>
+                    <a href="<?php echo htmlspecialchars($social['youtube']); ?>" target="_blank"><i class="fab fa-youtube"></i></a>
+                <?php endif; ?>
+                
+                <?php if(!empty($social['instagram'])): ?>
+                    <a href="<?php echo htmlspecialchars($social['instagram']); ?>" target="_blank"><i class="fab fa-instagram"></i></a>
+                <?php endif; ?>
+                
+                <?php if(!empty($social['facebook'])): ?>
+                    <a href="<?php echo htmlspecialchars($social['facebook']); ?>" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <?php endif; ?>
             </div>
         </div>
 
