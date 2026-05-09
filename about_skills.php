@@ -193,6 +193,65 @@ $skills = $skill_stmt->fetchAll(PDO::FETCH_ASSOC);
         visibility: visible;
         transform: translateY(0);
     }
+
+    /* --- Mobile responsive fixes --- */
+    @media (max-width: 768px) {
+        .skills-header .main-title {
+            font-size: 2.2rem;
+            margin-bottom: 28px;
+        }
+
+        .skills-filter-container {
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .filter-btn {
+            padding: 10px 18px;
+            font-size: 0.95rem;
+        }
+
+        .skills-grid-box {
+            width: 100%;
+            max-width: 100%;
+            padding: 20px 16px;
+            border-radius: 16px;
+            box-sizing: border-box;
+        }
+
+        .skills-grid {
+            gap: 16px;
+            max-width: 100%;
+        }
+
+        .tech-skill-item {
+            width: 72px;
+            height: 72px;
+            border-radius: 14px;
+        }
+
+        .tech-skill-item img {
+            width: 42px;
+            height: 42px;
+        }
+
+        /* Tooltips can be noisy on touch devices */
+        .tech-skill-item::after,
+        .tech-skill-item::before {
+            display: none;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .skills-filter-container {
+            justify-content: flex-start;
+        }
+
+        .filter-btn {
+            padding: 9px 14px;
+            font-size: 0.9rem;
+        }
+    }
 </style>
 
 <!-- JavaScript for filtering skills -->
