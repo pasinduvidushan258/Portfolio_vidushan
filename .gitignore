@@ -8,4 +8,4 @@ Thumbs.db
 
 .vscode/
 
-admin/generate_pass.php
+pv-manage/generate_pass.php
