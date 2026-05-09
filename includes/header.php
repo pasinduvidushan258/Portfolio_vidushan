@@ -48,6 +48,9 @@ try {
         </ul>
     </nav>
 
+    <!-- New Overlay Element -->
+    <div class="nav-overlay" id="nav-overlay"></div>
+
     <div class="social-links">
         <?php if(!empty($social['github'])): ?>
             <a href="<?php echo htmlspecialchars($social['github']); ?>" target="_blank" class="social-icon" title="GitHub">
@@ -72,27 +75,31 @@ try {
 <script>
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
+    const navOverlay = document.getElementById('nav-overlay'); 
     const navLinks = document.querySelectorAll('#nav-menu ul li a');
 
-    mobileMenu.addEventListener('click', () => {
+    // Toggle menu and overlay
+    function toggleMenu() {
         navMenu.classList.toggle('active');
+        navOverlay.classList.toggle('active'); 
+        
         const icon = mobileMenu.querySelector('i');
         if (navMenu.classList.contains('active')) {
             icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
+            icon.classList.add('fa-times'); 
         } else {
             icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+            icon.classList.add('fa-bars');  
         }
-    });
+    }
+
+    mobileMenu.addEventListener('click', toggleMenu);
+    navOverlay.addEventListener('click', toggleMenu);
 
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                const icon = mobileMenu.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                toggleMenu(); 
             }
             setActiveNavLink(link);
         });
