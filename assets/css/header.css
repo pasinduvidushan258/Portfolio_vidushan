@@ -11,8 +11,13 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
+    
+    position: fixed; 
     top: 0;
+    left: 0; 
+    width: 100%; 
+    box-sizing: border-box;
+    
     z-index: 1000;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle bottom border */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
