@@ -1,10 +1,8 @@
 # 👨‍💻 Professional Personal Portfolio
 
-A fully responsive, dynamic personal portfolio website designed to showcase my skills, projects, and educational background. Built entirely from scratch with a focus on custom secure dynamic features.
+A fully responsive, dynamic personal portfolio website designed to showcase my skills, projects, services, and educational background. Built entirely from scratch, it features a secure custom Admin Panel that allows seamless content management and real-time updates without the need to modify the source code.
 
----
-
-## 🔗 Links
+### 🔗 Links
 - **Live Demo:** [https://pasinduvidushan.infinityfreeapp.com](https://pasinduvidushan.infinityfreeapp.com)
 - **GitHub Repository:** [Portfolio_vidushan](https://github.com/pasinduvidushan/Portfolio_vidushan)
 
@@ -15,55 +13,58 @@ A fully responsive, dynamic personal portfolio website designed to showcase my s
 ### 📊 Secured Admin Dashboard
 Add, edit, and delete portfolio content in real-time with our custom secure management panel. Perfect for instant updates without altering source code.
 
-> **[Add your Admin Dashboard screenshot here]**
-> *Example: (e.g., `![Admin Dashboard](assets/images/admin-screenshot.png)`) - Place an image in your htdocs/images folder and link it.*
+<p align="center">
+  <img src="assets/readme-images/admin1.png" width="800" alt="Home Banner">
+</p>
+<p align="center">
+  <img src="assets/readme-images/admin2.png" width="400">
+  <img src="assets/readme-images/admin3.png" width="400">
+</p>
+
+---
 
 ### 🚀 Dynamic Project Showcase
 Your latest work, beautifully organized. This section dynamically fetches your newest projects from the database, ready to impress recruiters.
 
-> **[Add your Project Showcase screenshot here]**
-> *Example: (e.g., `![Project Grid](assets/images/project-screenshot.png)`) - Place an image in your htdocs/images folder and link it.*
+<p align="center">
+  <img src="assets/readme-images/home01.png" width="800" alt="Home Banner">
+</p>
+<p align="center">
+  <img src="assets/readme-images/home02.png" width="400">
+  <img src="assets/readme-images/home03.png" width="400">
+</p>
 
 ---
 
-## ✨ Features Breakdown
+## ✨ Key Features
 
-- **Dynamic Content:** Full CRUD (Create, Read, Update, Delete) management for projects and services via the Admin Dashboard.
-- **Robust Security:** PDO prepared statements and extensive SQL injection protection, ensuring data integrity.
-- **Optimized for Search:** Direct `robots.txt` and `noindex` configurations to hide sensitive admin pages and focus on public content.
-- **Glass-morphism Design:** A modern header and responsive UI that looks sharp on everything from phones to desktops.
-
----
-
-## 👨‍🎓 About the Author
-
-**Pasindu Vidushan**
-*Physics, Mathematics & Computer Science Student*
-*University of Kelaniya, Sri Lanka 🎓*
+- **Dynamic Content Management:** Add, edit, or delete portfolio projects and services directly from the admin dashboard.
+- **Secure Admin Panel:** Custom-built authentication system with PDO database connections to prevent SQL injection.
+- **Mobile-First Responsive Design:** Fully optimized for all screen sizes using CSS media queries and Flexbox.
+- **Interactive UI/UX:** Smooth scrolling, animated transitions, and a modern glass-morphism header design.
+- **Advanced Security:** Implemented custom routing, `robots.txt` configuration, and `noindex` meta tags to secure admin directories and prevent search engine indexing of sensitive areas.
 
 ---
 
-## Local Setup Instructions
+## 🛠️ Technologies Used
 
-1. **Clone:** `git clone https://github.com/pasinduvidushan/Portfolio_vidushan.git`
-2. **Move:** Copy to local `htdocs` or `www` directory.
-3. **Database:** Import the provided `.sql` file to your MySQL server.
-4. **Configure:** Update credentials in `includes/db_connect.php`.
-5. **Run:** Access at `http://localhost/Portfolio_vidushan`.
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-## 🛡️ Explicit Tech Stack Used
+- **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
+- **Backend:** PHP 
+- **Database:** MySQL
+- **Icons & Fonts:** FontAwesome, Google Fonts
+- **Version Control:** Git & GitHub
 
-This project is built using the following core technologies to ensure secure and dynamic functionality:
+---
 
-| Category | Technology | Usage |
-| :--- | :--- | :--- |
-| **Backend** | **PHP** (PDO) | Core dynamic logic and database connection |
-| **Database** | **MySQL** | Content and project data storage |
-| **Frontend** | **HTML5** | Content structure |
-| | **CSS3** | Style and layout |
-| | **JavaScript** | Navigation, animations, dynamic UX |
-| **Security** | **Prepared Statements** | Total protection against SQL injection |
-| | **File Configs** | `.htaccess` rules and secured directories |
-| **Tools** | **Git** / **GitHub** | Version control |
-| | **FontAwesome** | System icons |
-| | **Google Fonts** | Professional fonts |
+## ⚙️ Local Setup Instructions
+
+If you want to run this project locally on your machine, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/pasinduvidushan/Portfolio_vidushan.git](https://github.com/pasinduvidushan/Portfolio_vidushan.git)
