@@ -27,11 +27,11 @@ Add, edit, and delete portfolio content in real-time with our custom secure mana
 Your latest work, beautifully organized. This section dynamically fetches your newest projects from the database, ready to impress recruiters.
 
 <p align="center">
-  <img src="assets/readme-images/home01.png" width="800" alt="Home Banner">
+  <img src="assets/readme-images/home1.png" width="800" alt="Home Banner">
 </p>
 <p align="center">
-  <img src="assets/readme-images/home02.png" width="400">
-  <img src="assets/readme-images/home03.png" width="400">
+  <img src="assets/readme-images/home2.png" width="400">
+  <img src="assets/readme-images/home3.png" width="400">
 </p>
 
 ---
