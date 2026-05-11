@@ -28,7 +28,7 @@ try {
 ?>
 
 <!-- Hero section specific styles -->
-<link rel="stylesheet" href="assets/css/hero.css">
+<link rel="stylesheet" href="assets/css/hero.css?v=1.1">
 
 <main id="home" class="hero-section">
     <div class="hero-glow"></div>
