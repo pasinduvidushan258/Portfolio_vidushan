@@ -14,7 +14,7 @@ try {
     $favicon_path = "assets/images/logo.png"; 
     
     if ($hero && !empty($hero['image_path'])) {
-        $favicon_path = "assets/images/" . $hero['image_path']; 
+        $favicon_path = "uploads/" . $hero['image_path']; 
     }
 
 } catch(PDOException $e) {
