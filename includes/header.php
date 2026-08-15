@@ -7,15 +7,28 @@ try {
     if(!$social) {
         $social = ['github'=>'', 'linkedin'=>'', 'whatsapp'=>''];
     }
+
+    $hero_stmt = $conn->query("SELECT image_path FROM hero_section WHERE id=1");
+    $hero = $hero_stmt->fetch(PDO::FETCH_ASSOC);
+    
+    $favicon_path = "assets/images/logo.png"; 
+    
+    if ($hero && !empty($hero['image_path'])) {
+        $favicon_path = "assets/images/" . $hero['image_path']; 
+    }
+
 } catch(PDOException $e) {
     $social = ['github'=>'', 'linkedin'=>'', 'whatsapp'=>''];
+    $favicon_path = "assets/images/logo.png";
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="<?php echo $favicon_path; ?>">
     <title>Pasindu Vidushan | Portfolio</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
