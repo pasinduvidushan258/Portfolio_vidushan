@@ -29,6 +29,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="<?php echo $favicon_path; ?>">
+    <meta name="msvalidate.01" content="8BBDFD3E269BB386EF51AB9796AB1DE4" />
     <title>Pasindu Vidushan | Portfolio</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
